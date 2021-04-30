@@ -3,22 +3,18 @@ services:
   piwigo:
     container_name: piwigo
     image: piwigo-docker
-    networks:
-      - piwigo
     ports:
       - "8000:8000"
 
   mysql:
     container_name: piwigo_mysql
     image: mysql:8.0.18
+    volumes:docker run
+      - /home/piwigo/mysql/:/var/lib/mysql
     command: ["--default-authentication-plugin=mysql_native_password"]
-    networks:
-      - piwigo
     environment:
       MYSQL_USER: "piwigo"
       MYSQL_PASSWORD: "piwigo"
       MYSQL_DATABASE: "piwigo"
       MYSQL_RANDOM_ROOT_PASSWORD: "true"
 
-networks:
-  piwigo:
